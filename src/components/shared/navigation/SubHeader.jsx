@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function SubHeader() {
   return (
-    <div className='bg-[#F5F5F5]'>
+    <div className='bg-[#F5F5F5] shadow-b-xl'>
         <div className="mx-auto max-w-7xl px-4 lg:px-0 py-3">
             <div className="flex items-center justify-between">
                 <div className='flex items-center space-x-4 outfitLight text-[14px]'>
