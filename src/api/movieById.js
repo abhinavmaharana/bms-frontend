@@ -12,6 +12,7 @@ const useFetchMovieById = (id) => {
         const response = await fetch(`${BASE_URL}${MOVIE_URL}/${id}`, {
           headers: {
             "Content-Type": "application/json",
+            'Access-Control-Allow-Origin': '*',
           },
         });
         if (!response.ok) {
