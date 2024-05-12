@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { BASE_URL, MOVIE_URL } from "./constants";
 
-const useGetAllMovies = () => {
-  const [movies, setMovies] = useState([]);
+const useFetchMovieById = (id) => {
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchMovieById = async () => {
       try {
-        const response = await fetch(`${BASE_URL}${MOVIE_URL}`, {
+        const response = await fetch(`${BASE_URL}${MOVIE_URL}/${id}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -18,7 +18,7 @@ const useGetAllMovies = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setMovies(data);
+        setMovie(data);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -26,15 +26,17 @@ const useGetAllMovies = () => {
       }
     };
 
-    fetchMovies();
+    if (id) {
+      fetchMovieById();
+    }
 
     // Cleanup function
     return () => {
       // Any cleanup code if needed
     };
-  }, []); // Empty dependency array means this effect runs once after the component mounts
+  }, [id]); // Dependency array includes 'id', so the effect runs whenever 'id' changes
 
-  return { movies, loading, error };
+  return { movie, loading, error };
 };
 
-export default useGetAllMovies;
+export default useFetchMovieById;
